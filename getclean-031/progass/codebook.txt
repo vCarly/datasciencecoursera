@@ -1,0 +1,5 @@
+CODEBOOK
+
+Included activities consisted of only mean (mean()) and standard deviation (std()) calculations. The words (case insensitive) “-mean()” (mean), and “-std()” (standard deviation) were used to identify the mean and standard deviation functions included in the data set. 
+
+Functions like “-meanFreq()” and “angle(tBodyAccJerkMean),gravityMean)” were NOT included, as they are not direct mean or standard deviation functions per the “features_info.txt” file included with the original raw data set.  
