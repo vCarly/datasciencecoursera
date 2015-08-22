@@ -52,5 +52,5 @@ run_analysis <- function() {
     ## COLUMNS: Subject, Activity, Feature Signal, Feature Variable, Feature Value
     
     data = group_by(data, Subject, Activity)
-    
+    ## write.table(data, file="Stoughton_Tidy.txt", row.names = FALSE)
 }
