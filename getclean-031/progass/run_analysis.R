@@ -2,7 +2,8 @@ run_analysis <- function() {
   
     ## Carly Stoughton, August 2015
 
-    ## Function requires dplyr library - ensure dplyr is loaded
+    ## Function requires plyr and dplyr library - ensure dplyr is loaded
+    library(plyr)
     library(dplyr)
     
     ## Read in and combine subject IDs for test and train; label column
@@ -44,13 +45,18 @@ run_analysis <- function() {
     names(x) = gsub("^t", "Time-", names(x))
     names(x) = gsub("^f", "Freq-", names(x))
     
-    ## Build combined, final data set
-    data = cbind(subject, y) %>% cbind(x) %>% tbl_df
-    ## return(data)
+    ## PART 4 - MERGED DATA SET (data4)
+    ## Build combined, final data set for PART 4
     
-    ## PART 5 - TIDY DATA SET
-    ## COLUMNS: Subject, Activity, Feature Signal, Feature Variable, Feature Value
+    data4 = cbind(subject, y) %>% cbind(x) %>% tbl_df
     
-    data = group_by(data, Subject, Activity)
-    ## write.table(data, file="Stoughton_Tidy.txt", row.names = FALSE)
+    ## PART 5 - TIDY DATA SET (data5)
+    ## Group and sort by Subject and Activity to clean up
+    ## For each Subject's Activity, take the mean to summarize observations per Activity, per Subject
+
+    data5 = group_by(data4, Subject, Activity) %>% arrange(Subject, Activity)
+    data5 = ddply(data5, .variables=~Subject+Activity, .fun=colwise(mean))
+    
+    ## Write a text file containing Part 5's data5 tidy data set
+    ## write.table(data5, file="Stoughton_Tidy.txt", row.names = FALSE)
 }
